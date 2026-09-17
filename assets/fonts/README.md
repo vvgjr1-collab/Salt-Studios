@@ -1,149 +1,154 @@
 # Fonts
 
-Two typefaces, set up two different ways because they're licensed two
-different ways.
+Three typefaces doing three jobs.
 
-| Role | Typeface | How it loads |
-|---|---|---|
-| Headings | Bootzy TM (Type Mania) | Self-hosted from this folder |
-| Body | Neue Haas Grotesk Display Pro | Adobe Fonts web project |
-
-Until both are in place the site falls back to **Helvetica / Arial**, which is
-a deliberately close stand-in — Neue Haas Grotesk is Helvetica's own redesign,
-so the metrics and colour of the page barely shift.
+| Role | Typeface | Weight | How it loads | Status |
+|---|---|---|---|---|
+| Headings | Bootzy TM (Type Mania) | 400 | Self-hosted, this folder | ✅ installed |
+| Body | Neue Haas Grotesk Display Pro | 400 Regular | Adobe Fonts web project | ⏳ needs your kit URL |
+| Accents | Instrument Serif Italic | 400 italic | Google Fonts | ✅ live |
 
 ---
 
-## 1. Neue Haas Grotesk Display Pro — body
+## 1. Bootzy TM — headings ✅
 
-Don't self-host this one. It's on **Adobe Fonts**, included with any Creative
-Cloud plan, with unlimited web pageviews. That's the licensed route and it's
-already paid for.
+Installed and working. Files in this folder:
 
-1. Go to [fonts.adobe.com](https://fonts.adobe.com) and find **Neue Haas
-   Grotesk Display**.
-2. Create a **Web Project**, add the family, and select the weights the site
-   uses: **300 (Light)**, **400 (Roman)**, **500 (Medium)**, **600**.
-3. Adobe gives you a `<link>` like
-   `<link rel="stylesheet" href="https://use.typekit.net/abcdefg.css">`.
-4. Paste it into the `<head>` of `index.html`, `work.html` and `about.html` —
-   each already has a commented block showing exactly where — and delete the
-   comment markers around it.
+```
+BootzyTM.woff2    81 KB   <- what almost every browser uses
+BootzyTM.woff     97 KB   <- older browsers
+BootzyTM.ttf     154 KB   <- last resort
+```
 
-The CSS expects Adobe's family name, `neue-haas-grotesk-display`, which is
-already first in `--sans`. Nothing else to change.
+The `@font-face` in `salt.css` lists `local("Bootzy TM")` first, so if the font
+is installed on the machine viewing the site it's used straight from disk with
+no download at all.
 
-### On Thin vs Light
+### What's actually in the file
 
-You asked for thin/light. The site is set to **Light (300)** for body text,
-not Thin.
+Read off the font itself, not the marketing page:
 
-Neue Haas Thin at 16–17px on a warm off-white ground is genuinely hard to
-read — the strokes drop below one device pixel on non-retina screens and the
-text turns silver and patchy. It's a real legibility problem, not a taste call,
-and on a site whose job is to look like a competent studio it reads as a
-mistake rather than a choice.
+- **One weight**, `usWeightClass` 400. Asking for 300 or 700 gets you the same
+  face, or a browser-synthesised fake. Don't.
+- **No italic.** Italic angle is 0. This is why there's a separate serif.
+- **OpenType features present:** `calt`, `salt`, `ss01`, `ss02`, `aalt`, `kern`.
 
-Light gives you the same airy feel and holds up. If you want Thin somewhere,
-use it large, where it looks its best. In `assets/css/salt.css`:
+Note that's **two** stylistic sets in this cut, not the three the product page
+advertises. The automatic shuffle runs off `calt`, which the CSS keeps on:
 
 ```css
-.t-display { font-weight: 200; }   /* the hero headline */
-.stat__v    { font-weight: 200; }  /* the big numbers */
+h1, h2, h3, h4 { font-feature-settings: "calt" 1; }
 ```
 
-Try it and see — at those sizes it's lovely.
+To pin one set instead of letting it shuffle, add `"ss01" 1` or `"ss02" 1` to
+that rule in `salt.css`.
+
+### Licence reminder
+
+This repo is public, so these font files are now downloadable by anyone who
+visits it. That's redistribution, which is separate from using the font on
+your site and is something most commercial font EULAs forbid. For a graded
+class project the practical risk is small, but if you want it clean: make the
+repo private (Pages works on private repos on paid plans), or keep the font
+files out of git and upload them to the host directly.
 
 ---
 
-## 2. Bootzy TM — headings
+## 2. Neue Haas Grotesk Display Pro — body ⏳
 
-This one has to be self-hosted, so it needs webfont files in this folder:
+**This is the one thing still outstanding.** Until you add the kit, body text
+falls back to Helvetica/Arial — close enough that the layout doesn't move, but
+it isn't the real face.
 
-```
-assets/fonts/BootzyTM.woff2      <- required
-assets/fonts/BootzyTM.woff       <- optional, older-browser fallback
-```
+Don't self-host it. It's on **Adobe Fonts**, included with any Creative Cloud
+plan, unlimited web pageviews. You've already paid for it.
 
-The `@font-face` rule at the top of `assets/css/salt.css` already points at
-those exact paths. Drop the files in and the headings switch over.
+1. [fonts.adobe.com](https://fonts.adobe.com) → find **Neue Haas Grotesk Display**
+2. Create a **Web Project**, add the family, select weights **400** and **500**
+   (400 does nearly all the work; 500 is for eyebrows and buttons)
+3. Adobe gives you `<link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css">`
+4. Paste it into the `<head>` of all three pages — each has a commented block
+   marking the spot — and remove the `<!--` / `-->` around it
 
-Your Creative Market / YouWorkForThem purchase gives you desktop files (`.otf`
-/ `.ttf`). You need the **webfont licence** for `.woff2` — Type Mania sells it
-as an add-on, and it's usually what the "web" tier covers. If you're given
-`.otf` only, convert it, but the licence is the part that matters, not the
-file format.
+The CSS already expects Adobe's family name, `neue-haas-grotesk-display`.
 
-### Licensing — read this before pushing font files
+### Weight: Regular, not Light
 
-**This repo is public.** Committing `BootzyTM.woff2` publishes the font file
-to anyone who visits the repo, which nearly every commercial font EULA
-forbids — it's redistribution, separate from using the font on your site.
+Body is set to **400**. Light at 300 went too thin against Bootzy's weight —
+the page lost its spine, and the contrast between a very heavy heading and a
+very light paragraph read as two unrelated pages rather than one system.
 
-Two clean options:
-
-- Make the repo **private** and deploy Pages from it (GitHub Pages works on
-  private repos on paid plans), or
-- Keep the font file **out of git** and upload it to the host directly.
-
-For a graded class project the risk is small and the disclaimer helps, but
-it's worth knowing you'd be breaching the licence rather than finding out
-later. Adobe Fonts has no such issue, which is part of why NHG is set up that
-way.
-
-### The three stylistic sets
-
-Bootzy ships three stylistic sets and shuffles between them automatically so
-repeated letters don't look mechanical. That runs on contextual alternates,
-which the CSS keeps on:
+Thin still has a place, but at size. If you want it on the hero headline or
+the big stat numbers:
 
 ```css
-font-feature-settings: "calt" 1;
+.t-display { font-weight: 200; }
+.stat__v   { font-weight: 200; }
 ```
 
-To pin one set instead of letting it shuffle, add `"ss01" 1` (or `ss02`,
-`ss03`) to that rule on `h1, h2, h3, h4` in `salt.css`.
-
-### No italic
-
-Bootzy is a display face with no italic, so every place the old serif used
-italic for emphasis now uses **colour** instead — periwinkle on the accent
-words in the hero, the pinned statement, and the footer wordmark. A browser-
-synthesised slant on a face with this much texture looks broken, which is why
-it's done this way rather than left to fake it.
+Only worth it once the real NHG is loading — Arial has no thin weight, so
+nothing will happen until then.
 
 ---
 
-## Previewing before the files arrive
+## 3. Instrument Serif Italic — accents ✅
 
-`--display` and `--sans` both list the **desktop** font names too
-(`"Bootzy"`, `"Neue Haas Grotesk Display Pro"`). If those are installed on your
-machine, you'll see the real thing locally straight away.
+The counterweight. Bootzy has no italic and carries a lot of weight, so every
+emphasis word and pull quote sits in a high-contrast serif italic instead:
+light where Bootzy is heavy, curved where it's blunt.
 
-Be careful with that: it means **your** browser can look finished while every
-visitor still gets Helvetica. Check in a private window on a machine without
-the fonts installed, or just confirm the Adobe kit link is uncommented and
-`BootzyTM.woff2` is actually in this folder.
+Where it appears:
 
----
+- `.hero__title em` — "the *best*."
+- `.pin__text .w--accent` — "*generous*" in the scrolling statement
+- `.t-quote` — both pull quotes, entire
+- `.foot__wordmark em` — "*Salt*"
+- `.brand__name em` — "Salt *Studios*" in the header, the pairing in miniature
 
-## One design note
+It's set at `1.05em` relative to its surroundings, because a high-contrast
+serif reads optically smaller than a heavy grotesque at matched size.
 
-Bootzy describes itself as rugged and gritty, built for headlines and short
-lines. That's a real shift from where the identity deck sat, and it pulls
-against the studio's own line about not being the loudest object in the room.
+**Never use it for running text.** It's a display italic — it's there to
+interrupt, and it stops working the moment there's a paragraph of it.
 
-It can absolutely work — "honest materials, made well" has a hands-on quality
-that a textured face suits. But watch one place in particular: the **pinned
-ethos statement** on the landing page is about 40 words at up to 4rem, and
-Bootzy is doing all of it. That's a lot of textured display type in one block
-and it may read as noise rather than emphasis.
+### Swapping it
 
-If it does, switch that one block to the body face in `salt.css`:
+If you want something warmer and more classical, **EB Garamond** is the
+obvious alternative — same job, less fashion-forward, arguably closer to the
+"honest materials, tenth year of use" line. One change in `salt.css`:
 
 ```css
-.pin__text { font-family: var(--sans); font-weight: 300; }
+--serif: "EB Garamond", Georgia, "Times New Roman", serif;
 ```
 
-Light grotesque at that size is quiet and confident, and it fits the words
-better. Your call — it's a one-line change either way.
+and update the Google Fonts `<link>` in all three pages to
+`family=EB+Garamond:ital@1`.
+
+---
+
+## Previewing
+
+`--display` and `--sans` both list desktop font names too, and the Bootzy
+`@font-face` leads with `local()`. So if these are installed on your machine
+you'll see the real thing immediately.
+
+Careful with that: **your** browser can look finished while every visitor
+still gets Helvetica for the body. Check in a private window, or just confirm
+the Adobe kit `<link>` is uncommented.
+
+---
+
+## A note on the manifesto
+
+The pinned ethos statement on the landing page is about 40 words at up to
+4rem, all of it in Bootzy. It's dense — deliberately so, it's the page's big
+display moment — but it's the one place where the face is doing more work than
+it was designed for, and it's worth a look on a real screen before the pitch.
+
+If it reads as noise rather than emphasis:
+
+```css
+.pin__text { font-family: var(--sans); font-weight: 400; }
+```
+
+The serif italic on "generous" stays either way.
