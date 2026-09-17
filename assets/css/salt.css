@@ -629,6 +629,22 @@ h1, h2, h3, h4 {
 .marquee__track:hover .mark { opacity: 0.28; }
 .marquee__track .mark:hover { opacity: 1; color: var(--peri-deep); }
 
+/* Logo files, when one exists, replace the typographic mark.
+   Logos arrive at wildly different proportions, so normalise on HEIGHT and
+   let width follow. Per-logo optical tuning via --s on the .mark. */
+.mark img {
+  display: none;
+  height: calc(clamp(1.35rem, 1.05rem + 1.1vw, 2.125rem) * var(--s, 1));
+  width: auto;
+  max-width: 11rem;
+  object-fit: contain;
+  filter: grayscale(1);
+  transition: filter 0.45s var(--ease-soft);
+}
+.mark.has-logo img { display: block; }
+.mark.has-logo .mark__label { display: none; }
+.marquee__track .mark:hover img { filter: none; }
+
 /* Each partner gets a slightly different typographic treatment so the row
    reads as a wall of marks rather than a list. */
 .mark--a { font-family: var(--display); font-weight: 500; letter-spacing: -0.015em; }

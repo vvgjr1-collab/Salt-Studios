@@ -156,17 +156,43 @@
   /* ------------------------------------------------------------------
      Marquee — duplicate the track so the loop is seamless
      ------------------------------------------------------------------ */
-  document.querySelectorAll('.marquee__track').forEach(function (track) {
+  // Constant speed regardless of how many partners are listed
+  function setMarqueeSpeed(track) {
+    var duration = track.scrollWidth / 2 / 62;
+    if (duration > 0) track.style.setProperty('--speed', duration.toFixed(1) + 's');
+  }
+
+  var tracks = document.querySelectorAll('.marquee__track');
+
+  tracks.forEach(function (track) {
     if (reduced) return;
     var items = track.innerHTML;
     track.innerHTML = items + items;
     Array.prototype.slice.call(track.children).slice(track.children.length / 2)
       .forEach(function (el) { el.setAttribute('aria-hidden', 'true'); });
+    setMarqueeSpeed(track);
+  });
 
-    // Constant speed regardless of how many partners are listed
-    var pxPerSecond = 62;
-    var duration = track.scrollWidth / 2 / pxPerSecond;
-    track.style.setProperty('--speed', duration.toFixed(1) + 's');
+  /* ------------------------------------------------------------------
+     Partner logos — a mark swaps to its logo file once one loads, and
+     keeps its typographic fallback until then. Runs after the marquee
+     has been duplicated so the cloned marks are wired up too.
+     ------------------------------------------------------------------ */
+  var logos = document.querySelectorAll('.mark img');
+  var pending = logos.length;
+
+  function settle() {
+    if (--pending > 0) return;
+    tracks.forEach(setMarqueeSpeed); // logo widths changed the track length
+  }
+
+  logos.forEach(function (img) {
+    var mark = img.closest('.mark');
+    var ok = function () { mark.classList.add('has-logo'); settle(); };
+
+    if (img.complete) { (img.naturalWidth > 0 ? ok : settle)(); return; }
+    img.addEventListener('load', ok);
+    img.addEventListener('error', settle);
   });
 
   /* ------------------------------------------------------------------
