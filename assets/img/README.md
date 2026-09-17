@@ -40,7 +40,7 @@ Until the file exists, the page shows a labelled placeholder in its place.
 
 | Filename | Ratio | Suggested px | What it should show | Status |
 |---|---|---|---|---|
-| `hero-studio.jpg` | 4:5 | 1200 × 1500 | The hero image, portrait. A studio/workshop moment — a model on a bench, a hand on a joint, material samples. Quiet and warm, not a product beauty shot. | ⏳ |
+| `hero-studio.jpg` | 4:5 | 1080 × 1350 | Brand image: lounge chair with the logomark overlaid, figure in motion blur. Exact 4:5, copied without re-encoding. | ✅ |
 | `chauki-hero.jpg` | 16:9 | 1376 × 768 | Chauki in a real 2BHK living room, in use. | ✅ |
 | `focus-01.jpg` | 3:4 | 1200 × 1600 | Oxblood bench, studio mark cut into the pivot. | ✅ |
 | `focus-02.jpg` | 3:4 | 1200 × 1600 | Armchair, leather armrest cover with the mark on a wooden medallion. | ✅ |
