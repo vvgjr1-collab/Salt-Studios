@@ -1,0 +1,21 @@
+# Source material that gets dropped into the project root on its way to
+# assets/img/. These are working files, not part of the site — keep them out
+# of the repo so a stray `git add -A` can't sweep megabytes of phone photos
+# into a commit.
+#
+# Patterns are anchored with a leading slash so they only match the root.
+# Nothing here affects assets/img/, which is where the site's real images live.
+
+/IMG_*
+/WhatsApp*
+/FreeSample-Vectorizer-io-*
+/image-*.webp
+/*.psd
+/*.ai
+/*.indd
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
