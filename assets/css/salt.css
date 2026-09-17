@@ -302,6 +302,11 @@ h1, h2, h3, h4 {
 .nav a[aria-current="page"] { color: var(--ink); }
 .nav a[aria-current="page"]::after { transform: scaleX(1); background: var(--peri-deep); }
 
+@media (max-width: 700px) {
+  /* Bigger touch targets on phones */
+  .nav a { padding-block: 0.6rem; }
+}
+
 @media (max-width: 560px) {
   .nav { gap: 1.1rem; }
   .nav a { font-size: 0.8125rem; }
@@ -562,6 +567,18 @@ h1, h2, h3, h4 {
   .hero__aside { max-width: 34rem; }
 }
 
+@media (max-width: 700px) {
+  /* With the media column gone, bottom-aligning leaves a dead band under the
+     header. Centre the content and reserve a strip for the scroll cue so it
+     stops colliding with the button. */
+  .hero {
+    align-items: center;
+    padding-top: clamp(6rem, 12vh, 8rem);
+    padding-bottom: 5.5rem;
+  }
+  .hero__cue { bottom: 1.5rem; }
+}
+
 /* --------------------------------------------------------------------------
    9. Marquee — brand partners
    -------------------------------------------------------------------------- */
@@ -656,8 +673,10 @@ h1, h2, h3, h4 {
 .pin__text .w--accent { color: var(--peri-deep); font-style: italic; font-weight: 300; }
 
 .pin__foot {
+  /* The containing block is .pin__inner's PADDING box, so left/right of 0
+     would sit outside the gutter and clip. Match the gutter explicitly. */
   position: absolute;
-  left: 0; right: 0;
+  left: var(--gutter); right: var(--gutter);
   bottom: clamp(1.75rem, 5vh, 3.5rem);
   display: flex;
   justify-content: space-between;
@@ -688,7 +707,11 @@ h1, h2, h3, h4 {
 @media (max-width: 700px) {
   .pin { height: 240vh; }
   .pin__text { max-width: 16ch; }
-  .pin__foot { font-size: 0.6875rem; }
+  /* Three items don't fit at phone width — drop the location and let the
+     progress bar take the space it frees. */
+  .pin__foot { font-size: 0.6875rem; gap: 0.85rem; }
+  .pin__foot > span:last-child { display: none; }
+  .pin__bar { max-width: none; }
 }
 
 /* --------------------------------------------------------------------------
