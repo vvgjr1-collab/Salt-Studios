@@ -196,6 +196,19 @@
   });
 
   /* ------------------------------------------------------------------
+     Studio logomark — same idea: the header and footer marks swap to
+     assets/img/logomark.svg once it exists, and keep the inline SVG
+     stand-in until then.
+     ------------------------------------------------------------------ */
+  document.querySelectorAll('.brand__mark img').forEach(function (img) {
+    var brand = img.closest('.brand');
+    var ok = function () { brand.classList.add('has-logo'); };
+
+    if (img.complete) { if (img.naturalWidth > 0) ok(); return; }
+    img.addEventListener('load', ok);
+  });
+
+  /* ------------------------------------------------------------------
      Stat count-up
      ------------------------------------------------------------------ */
   var counters = document.querySelectorAll('[data-count]');

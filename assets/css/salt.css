@@ -5,6 +5,27 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   0. Webfonts
+   -------------------------------------------------------------------------- */
+
+/* Bootzy TM (Type Mania) — headings. Self-hosted: drop the webfont files into
+   assets/fonts/. Until those files exist this rule resolves to nothing and the
+   fallback chain in --display takes over, so the site never breaks.
+   See assets/fonts/README.md. */
+@font-face {
+  font-family: "Bootzy TM";
+  src: url("../fonts/BootzyTM.woff2") format("woff2"),
+       url("../fonts/BootzyTM.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Neue Haas Grotesk Display Pro — body. NOT self-hosted: it comes from an
+   Adobe Fonts web project, added as a <link> in each page's <head>. The
+   family name Adobe serves it under is neue-haas-grotesk-display. */
+
+/* --------------------------------------------------------------------------
    1. Tokens
    -------------------------------------------------------------------------- */
 :root {
@@ -35,8 +56,18 @@
   --rule-soft:  color-mix(in srgb, var(--ink) 8%, transparent);
 
   /* Type */
-  --display: "Fraunces", "Cambria", Georgia, "Times New Roman", serif;
-  --sans: "Inter", "Calibri", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Headings — Bootzy TM. "Bootzy TM" is the @font-face name for visitors;
+     the bare "Bootzy" picks up a desktop install so YOU see it locally even
+     before the webfont files land. Arial Black keeps the heavy display
+     silhouette when neither is available. */
+  --display: "Bootzy TM", "Bootzy", "Arial Black", "Helvetica Neue", Helvetica, sans-serif;
+
+  /* Body — Neue Haas Grotesk Display Pro. First name is Adobe Fonts', second
+     is the desktop install. Helvetica/Arial is the right fallback here:
+     Neue Haas Grotesk is Helvetica's own redesign, so the metrics are close. */
+  --sans: "neue-haas-grotesk-display", "Neue Haas Grotesk Display Pro",
+          "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* Metrics */
   --gutter: clamp(1.25rem, 4vw, 4rem);
@@ -65,7 +96,10 @@ body {
   font-family: var(--sans);
   font-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
   line-height: 1.65;
-  font-weight: 350;
+  /* Light, not Thin. Neue Haas Thin (100–200) at body size on a light ground
+     is genuinely hard to read and falls apart on low-DPI screens. Thin is
+     reserved for large type below, where it belongs. */
+  font-weight: 300;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -95,11 +129,14 @@ body::before {
 h1, h2, h3, h4 {
   font-family: var(--display);
   font-weight: 400;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
   line-height: 1.08;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   margin: 0;
   text-wrap: balance;
+  /* Bootzy ships three stylistic sets and shuffles between them so repeated
+     letters don't look mechanical. That runs off contextual alternates, so
+     keep calt on. To pin one set instead, add "ss01" 1 (or ss02 / ss03). */
+  font-feature-settings: "calt" 1;
 }
 
 .t-display {
@@ -122,10 +159,12 @@ h1, h2, h3, h4 {
 .t-body { color: var(--slate); max-width: var(--measure); }
 .t-body + .t-body { margin-top: 1.1em; }
 
+/* Bootzy has no italic, so emphasis through the display font is carried by
+   colour rather than a synthesised slant, which would look broken on a face
+   with this much texture. */
 .t-quote {
   font-family: var(--display);
-  font-style: italic;
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(1.5rem, 1rem + 2.2vw, 3rem);
   line-height: 1.22;
   letter-spacing: -0.02em;
@@ -255,7 +294,20 @@ h1, h2, h3, h4 {
   text-decoration: none;
   color: var(--ink);
 }
-.brand__mark { width: 22px; height: 22px; flex: none; }
+/* The mark swaps to assets/img/logomark.svg once that file exists; the inline
+   SVG beneath it stands in until then. */
+.brand__mark {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+.brand__mark svg,
+.brand__mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.brand__mark img { display: none; }
+.brand.has-logo .brand__mark img { display: block; }
+.brand.has-logo .brand__mark svg { display: none; }
 .brand__mark path { fill: var(--peri-deep); }
 .brand__mark rect { fill: var(--ink); }
 .brand__name {
@@ -495,8 +547,7 @@ h1, h2, h3, h4 {
 .is-ready .line > span { transform: translateY(0); }
 
 .hero__title em {
-  font-style: italic;
-  font-weight: 300;
+  font-style: normal;
   color: var(--peri-deep);
 }
 
@@ -649,7 +700,7 @@ h1, h2, h3, h4 {
    reads as a wall of marks rather than a list. */
 .mark--a { font-family: var(--display); font-weight: 500; letter-spacing: -0.015em; }
 .mark--b { font-family: var(--sans); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9em; }
-.mark--c { font-family: var(--display); font-weight: 300; font-style: italic; letter-spacing: 0.01em; }
+.mark--c { font-family: var(--display); font-weight: 400; letter-spacing: 0.01em; }
 .mark--d { font-family: var(--sans); font-weight: 300; letter-spacing: 0.24em; text-transform: uppercase; font-size: 0.82em; }
 .mark--e { font-family: var(--display); font-weight: 600; letter-spacing: -0.03em; }
 .mark__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--peri); flex: none; }
@@ -686,7 +737,7 @@ h1, h2, h3, h4 {
   opacity: clamp(0.14, calc((var(--p, 0) * (var(--n) + 7) - var(--i)) * 0.62), 1);
   transition: opacity 0.12s linear;
 }
-.pin__text .w--accent { color: var(--peri-deep); font-style: italic; font-weight: 300; }
+.pin__text .w--accent { color: var(--peri-deep); font-style: normal; }
 
 .pin__foot {
   /* The containing block is .pin__inner's PADDING box, so left/right of 0
@@ -942,6 +993,10 @@ h1, h2, h3, h4 {
 .site-foot .brand { color: var(--paper); }
 .site-foot .brand__mark rect { fill: var(--paper); }
 .site-foot .brand__mark path { fill: var(--peri); }
+/* A black line-art logomark would vanish on the navy footer. CSS can't recolour
+   an <img>, so flip it. If the logomark isn't monochrome black, drop a
+   logomark-light.svg in instead and point this rule's markup at it. */
+.site-foot .brand__mark img { filter: invert(1); }
 .site-foot .brand__name em { color: color-mix(in srgb, var(--paper) 55%, transparent); }
 
 .foot__top {
@@ -958,7 +1013,7 @@ h1, h2, h3, h4 {
   letter-spacing: -0.03em;
   margin: 0 0 1.25rem;
 }
-.foot__wordmark em { font-style: italic; color: var(--peri); }
+.foot__wordmark em { font-style: normal; color: var(--peri); }
 
 .foot h4 {
   font-family: var(--sans);
