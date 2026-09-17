@@ -46,6 +46,16 @@ Until the file exists, the page shows a labelled placeholder in its place.
 | `focus-02.jpg` | 3:4 | 1200 × 1600 | Armchair, leather armrest cover with the mark on a wooden medallion. | ✅ |
 | `focus-03.jpg` | 3:4 | 1200 × 1600 | Armchair arm, walnut cap with travertine inlay. | ✅ |
 
+| `brand-01.jpg` | 4:5 src | 1080 × 1350 | Brand band: oxblood armchair, mark overlaid. | ✅ |
+| `brand-02.jpg` | 4:5 src | 1080 × 1350 | Brand band: dark leather swivel chair, mark overlaid. | ✅ |
+
+The **brand band** sits between the pinned statement and the pillars. It is
+full-bleed and crops its 4:5 sources to 4:3 on desktop (two squares came out
+681px tall and swallowed the viewport); on phones it becomes a swipeable row
+at the sources own 4:5. A third frame would make it a proper triptych — add a
+`.band__item` in index.html and switch `grid-template-columns` to
+`repeat(3, 1fr)` in salt.css.
+
 The focus trio were changed from 1:1 to **3:4** — the supplied renders are all
 portrait product details, and a square crop was cutting them badly (the
 tallest is 9:16, so a square would have lost nearly half its height).
