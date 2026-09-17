@@ -81,13 +81,87 @@ tallest is 9:16, so a square would have lost nearly half its height).
 
 ## Keeping the look consistent
 
-If you're generating these, the deck's visual language is worth repeating in
-every prompt so the set hangs together:
+The hardest part of eight separate generations is making them read as one
+catalogue. Three rules matter more than the wording of any single prompt:
 
-> Warm off-white (#F0EFEA) and periwinkle (#7A90C9) palette, deep navy accents
-> (#2A3246), soft natural daylight, matte finishes, light wood and terracotta,
-> Indian urban apartment context, calm editorial product photography, no
-> people's faces in close-up, no text or logos in the image.
+1. **Generate them in one sitting**, same tool, same settings. Style drifts
+   between sessions.
+2. **Reuse the style block below verbatim** at the end of every prompt.
+3. **Pick one register and hold it.** Right now `chauki-hero.jpg` is bright
+   lifestyle-in-context while the three `focus-*` shots are dark, moody studio
+   product photography. Both are good, but they're two different catalogues.
+   For the eight product cards, go with **lifestyle-in-context** — it matches
+   what the copy claims (built for how India actually lives) and the moody
+   detail shots then read as deliberate punctuation rather than a clash.
+
+### Style block — paste at the end of every prompt
+
+> photorealistic editorial furniture catalogue photography, soft diffused
+> afternoon daylight, warm neutral palette of off-white #F0EFEA and sand,
+> teak and walnut wood, matte finishes, Indian urban apartment, lived-in but
+> uncluttered, 35mm, natural shadows, subtle film grain, no text, no logos,
+> no watermarks, no people's faces, 16:9
+
+---
+
+## Catalogue prompts — `work.html`
+
+All eight are **16:9**, target 1600 × 900. Filenames are in the work.html
+table above.
+
+**`fold-and-stay.jpg`** — Nilkamal, 2024
+> A wall-mounted fold-down study desk in a small rented Indian apartment
+> bedroom, worktop folded open with a laptop and a stack of books, slim
+> integrated shelf above holding files and a small plant, pale plastered wall,
+> four visible wall fixings, morning light from a window to the left
+
+**`nest-bed.jpg`** — Wakefit, 2023
+> A low knock-down engineered-wood bed frame in a compact Indian bedroom, one
+> under-bed storage drawer pulled halfway open showing folded linen, plain
+> cotton bedding in oatmeal, bare wall behind, soft daylight, a flat-pack
+> carton leaning against the wall out of focus
+
+**`monsoon-series.jpg`** — Durian, 2023
+> A folding bistro set of powder-coated steel and weather-treated rope on a
+> narrow apartment balcony during the monsoon, rain-wet railing, grey-green
+> light, potted plants, a stackable rope lounger folded against the wall,
+> water beading on the steel frame
+
+**`stack-and-store.jpg`** — Home Centre, 2022
+> A slim 30 cm deep entryway unit in a narrow Indian apartment corridor,
+> combining a shoe rack, a bench seat and key hooks, two pairs of sandals
+> below, a set of keys on the hook, warm light from a doorway, tiled floor
+
+**`terrain-vases.jpg`** — Ellementry, 2024
+> A group of five stepped terracotta and stoneware vessels in nesting sizes,
+> layered horizontal forms inspired by salt pans and farmland terraces,
+> arranged on a pale plaster surface, one holding dried grasses, warm raking
+> afternoon light casting long soft shadows
+
+**`jharokha-mirrors.jpg`** — Nestasia, 2023
+> A carved mango wood wall mirror reinterpreting a traditional jharokha window
+> in a slim modern profile, hung on a warm off-white wall in a small Indian
+> living room, reflecting a sunlit window, a low console beneath with a brass
+> bowl, soft shadows
+
+**`craft-edit.jpg`** — Swadesh Bandhani cluster, 2024
+> A small side table combining CNC-cut wood with a handwoven cane top and
+> bandhani-inspired inlay detail, beside a matching serving tray, in a warm
+> Indian living room, close three-quarter view showing the cane weave and
+> inlay pattern, soft daylight
+
+**`diya-brass.jpg`** — Chumbak, 2022
+> Brass and ceramic tealight holders and a shallow brass urli bowl filled with
+> water and floating marigolds, arranged on a dark wood console against a warm
+> plastered wall, a few lit tealights, warm low light, festive but restrained,
+> not overtly Diwali-themed
+
+### After generating
+
+Don't drop raw exports into the repo. Give the files to Claude with their
+paths and they'll be resized, converted to progressive JPEG and compressed —
+the three focus renders went from 5.5 MB to 390 KB that way, with no visible
+difference.
 
 ## Adding a new slot
 
