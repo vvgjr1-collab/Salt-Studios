@@ -13,14 +13,10 @@
 
 <link rel="icon" href="assets/img/favicon.svg">
 
-<!-- BODY FONT — Neue Haas Grotesk Display Pro, served by Adobe Fonts.
-     It is included with any Creative Cloud plan, so this is the licensed way
-     to use it on the web. At fonts.adobe.com: create a Web Project, add
-     "Neue Haas Grotesk Display", then paste the kit URL below and uncomment
-     the line. Until then the site falls back to Helvetica/Arial.
-
-<link rel="stylesheet" href="https://use.typekit.net/XXXXXXX.css">
--->
+<!-- BODY FONT — Neue Haas Grotesk Display Pro, self-hosted from
+     assets/fonts/ via @font-face in salt.css. Nothing to add here.
+     To serve it from an Adobe Fonts kit instead, paste that kit's <link>
+     here and move "neue-haas-grotesk-display" to the front of --sans. -->
 
 <!-- HEADING FONT — Bootzy TM is self-hosted from assets/fonts/ via @font-face
      in salt.css. Nothing to add here. See assets/fonts/README.md. -->
@@ -30,7 +26,7 @@
      reading as one solid block of weight. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/salt.css">
 </head>
 
@@ -102,54 +98,28 @@
   <section class="marquee" aria-label="Brand partners">
     <p class="marquee__label">Trusted by the brands Indian homes already buy from</p>
     <div class="marquee__viewport">
-      <!-- Each mark shows its logo file if one exists in assets/img/logos/,
-           and falls back to the typographic treatment if not. Tune a logo's
-           optical size with style="--s:1.15" on its .mark. -->
+      <!-- Set as type, not logos: the partnerships are fictional, so borrowed
+           trademarks would be the one thing here that could fairly be
+           questioned. Each treatment echoes the character of that brand's
+           real mark — see .mark--* in salt.css. -->
       <div class="marquee__track">
-        <span class="mark mark--a">
-          <img src="assets/img/logos/godrej-interio.svg" alt="Godrej Interio">
-          <span class="mark__label">Godrej Interio</span>
-        </span>
+        <span class="mark mark--godrej">Godrej Interio</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--b">
-          <img src="assets/img/logos/nilkamal.svg" alt="Nilkamal">
-          <span class="mark__label">Nilkamal</span>
-        </span>
+        <span class="mark mark--nilkamal">Nilkamal</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--c">
-          <img src="assets/img/logos/wakefit.svg" alt="Wakefit">
-          <span class="mark__label">Wakefit</span>
-        </span>
+        <span class="mark mark--wakefit">Wakefit</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--e">
-          <img src="assets/img/logos/durian.svg" alt="Durian">
-          <span class="mark__label">Durian</span>
-        </span>
+        <span class="mark mark--durian">Durian</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--d">
-          <img src="assets/img/logos/ellementry.svg" alt="Ellementry">
-          <span class="mark__label">Ellementry</span>
-        </span>
+        <span class="mark mark--ellementry">Ellementry</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--a">
-          <img src="assets/img/logos/nestasia.svg" alt="Nestasia">
-          <span class="mark__label">Nestasia</span>
-        </span>
+        <span class="mark mark--nestasia">Nestasia</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--b">
-          <img src="assets/img/logos/home-centre.svg" alt="Home Centre">
-          <span class="mark__label">Home Centre</span>
-        </span>
+        <span class="mark mark--homecentre">Home Centre</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--c">
-          <img src="assets/img/logos/chumbak.svg" alt="Chumbak">
-          <span class="mark__label">Chumbak</span>
-        </span>
+        <span class="mark mark--chumbak">Chumbak</span>
         <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--d">
-          <img src="assets/img/logos/swadesh.svg" alt="Swadesh Bandhani">
-          <span class="mark__label">Swadesh Bandhani</span>
-        </span>
+        <span class="mark mark--swadesh">Swadesh Bandhani</span>
         <span class="mark__dot" aria-hidden="true"></span>
       </div>
     </div>

@@ -173,27 +173,11 @@
     setMarqueeSpeed(track);
   });
 
-  /* ------------------------------------------------------------------
-     Partner logos — a mark swaps to its logo file once one loads, and
-     keeps its typographic fallback until then. Runs after the marquee
-     has been duplicated so the cloned marks are wired up too.
-     ------------------------------------------------------------------ */
-  var logos = document.querySelectorAll('.mark img');
-  var pending = logos.length;
-
-  function settle() {
-    if (--pending > 0) return;
-    tracks.forEach(setMarqueeSpeed); // logo widths changed the track length
+  // Partner marks are type, so their widths depend on webfonts. Retime the
+  // loop once those have settled or the seam drifts.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { tracks.forEach(setMarqueeSpeed); });
   }
-
-  logos.forEach(function (img) {
-    var mark = img.closest('.mark');
-    var ok = function () { mark.classList.add('has-logo'); settle(); };
-
-    if (img.complete) { (img.naturalWidth > 0 ? ok : settle)(); return; }
-    img.addEventListener('load', ok);
-    img.addEventListener('error', settle);
-  });
 
   /* ------------------------------------------------------------------
      Studio logomark — same idea: the header and footer marks swap to

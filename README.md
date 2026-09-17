@@ -26,10 +26,10 @@ assets/img/             photos — see assets/img/README.md
 .claude/serve.js        local preview server (dev only)
 ```
 
-Type is Bootzy TM (headings, self-hosted), Neue Haas Grotesk Display Pro
-(body, via Adobe Fonts) and Instrument Serif Italic (accents, via Google
-Fonts). See [`assets/fonts/README.md`](assets/fonts/README.md) — the Adobe
-kit URL is the one thing still to add.
+Type is Bootzy TM (headings) and Neue Haas Grotesk Display Pro (body), both
+self-hosted from `assets/fonts/`, plus Instrument Serif (accents and pull
+quotes) from Google Fonts. See [`assets/fonts/README.md`](assets/fonts/README.md)
+for the weight map and a note on licensing.
 
 Everything else — grain texture, favicon, placeholder art — is inline SVG.
 

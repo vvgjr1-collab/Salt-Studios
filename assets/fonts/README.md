@@ -5,8 +5,8 @@ Three typefaces doing three jobs.
 | Role | Typeface | Weight | How it loads | Status |
 |---|---|---|---|---|
 | Headings | Bootzy TM (Type Mania) | 400 | Self-hosted, this folder | ✅ installed |
-| Body | Neue Haas Grotesk Display Pro | 400 Regular | Adobe Fonts web project | ⏳ needs your kit URL |
-| Accents | Instrument Serif Italic | 400 italic | Google Fonts | ✅ live |
+| Body | Neue Haas Grotesk Display Pro | 400 Regular | Self-hosted, this folder | ✅ installed |
+| Accents | Instrument Serif | 400 roman + italic | Google Fonts | ✅ live |
 
 ---
 
@@ -54,23 +54,63 @@ files out of git and upload them to the host directly.
 
 ---
 
-## 2. Neue Haas Grotesk Display Pro — body ⏳
+## 2. Neue Haas Grotesk Display Pro — body ✅
 
-**This is the one thing still outstanding.** Until you add the kit, body text
-falls back to Helvetica/Arial — close enough that the layout doesn't move, but
-it isn't the real face.
+Self-hosted. The supplied TTFs were converted to WOFF2, which cut them from
+806 KB to 209 KB — **74% smaller** — for pixel-identical rendering. TTF as a
+webfont is uncompressed, so this is free performance.
 
-Don't self-host it. It's on **Adobe Fonts**, included with any Creative Cloud
-plan, unlimited web pageviews. You've already paid for it.
+Eight faces are declared in `salt.css`:
 
-1. [fonts.adobe.com](https://fonts.adobe.com) → find **Neue Haas Grotesk Display**
-2. Create a **Web Project**, add the family, select weights **400** and **500**
-   (400 does nearly all the work; 500 is for eyebrows and buttons)
-3. Adobe gives you `<link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css">`
-4. Paste it into the `<head>` of all three pages — each has a commented block
-   marking the spot — and remove the `<!--` / `-->` around it
+| File | CSS weight | Style |
+|---|---|---|
+| `NeueHaasDisplay-Thin.woff2` | 250 | normal |
+| `NeueHaasDisplay-Light.woff2` | 300 | normal |
+| `NeueHaasDisplay-Roman.woff2` | 400 | normal |
+| `NeueHaasDisplay-RomanItalic.woff2` | 400 | italic |
+| `NeueHaasDisplay-Medium.woff2` | 500 | normal |
+| `NeueHaasDisplay-Bold.woff2` | 700 | normal |
+| `NeueHaasDisplay-BoldItalic.woff2` | 700 | italic |
+| `NeueHaasDisplay-Black.woff2` | 900 | normal |
 
-The CSS already expects Adobe's family name, `neue-haas-grotesk-display`.
+**Ask for the number, never the name.** `font-weight: 400`, not "Roman".
+
+Browsers only download a face that something on the page actually uses, so
+declaring all eight costs nothing — each rule is a menu entry, not a request.
+The landing page currently pulls six of them (300/400/500/700/700i/900),
+about 160 KB, because the partner marks span the weight range.
+
+### Adding the weights that weren't shipped
+
+The original download had sixteen faces. XXThin, XThin, and the Light/Medium/
+Black italics were left out because nothing uses them. To add one: convert the
+TTF to WOFF2, drop it in this folder, and add a matching `@font-face` block
+at the top of `salt.css`. Mapping is XXThin 100, XThin 200.
+
+### Switching to Adobe Fonts instead
+
+Neue Haas Grotesk is on **Adobe Fonts**, included with any Creative Cloud plan
+with unlimited web pageviews — which is a properly licensed route, and one
+you've already paid for. If you'd rather use it:
+
+1. [fonts.adobe.com](https://fonts.adobe.com) → **Neue Haas Grotesk Display** →
+   create a Web Project with weights 300/400/500/700/900
+2. Paste the kit `<link>` into the `<head>` of all three pages (each has a
+   comment marking the spot)
+3. Move `"neue-haas-grotesk-display"` to the front of `--sans` in `salt.css`
+4. Delete the `NeueHaasDisplay-*.woff2` files and their `@font-face` blocks
+
+### Where these files came from
+
+The supplied files are from cufonfonts, which redistributes commercial fonts
+without licence. Neue Haas Grotesk is Monotype/Commercial Type, and this repo
+is public, so the font files are now downloadable by anyone who visits it.
+
+That's worth knowing rather than discovering later, and the Adobe Fonts route
+above fixes it at no cost since you already have Creative Cloud. Failing that,
+making the repo private removes the redistribution problem even if it doesn't
+license the desktop use. For a graded class project the practical risk is
+small — but it's a real one, not a technicality.
 
 ### Weight: Regular, not Light
 
