@@ -1,4 +1,26 @@
-# Image slots
+# Images
+
+## Brand assets (already in place)
+
+| File | Used by |
+|---|---|
+| `logomark.svg` | Header and footer marks on all three pages |
+| `favicon.svg` | Browser tab icon |
+
+`logomark.svg` is cropped to the mark's bounding box (`viewBox="611 281 280.8
+469.7"`, aspect ratio 0.598) and filled with the brand ink `#2A3246`. The
+footer forces it to white with `filter: brightness(0) invert(1)`, so the fill
+colour can change without breaking the dark version.
+
+It came from a Vectorizer.io auto-trace, which arrived with a full-canvas
+white background plate and 92% empty margin — both removed. If you ever have
+the original Illustrator or Figma vector, re-export from that instead: an
+auto-trace approximates curves, and at large sizes (a poster, a pull-up
+banner) the difference shows.
+
+---
+
+# Photo slots
 
 Every photo position on the site is already wired up. Drop a file into this
 folder with the **exact filename below** and it appears — no HTML edits needed.

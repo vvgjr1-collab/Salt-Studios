@@ -319,11 +319,14 @@ h1, h2, h3, h4 {
 }
 /* The mark swaps to assets/img/logomark.svg once that file exists; the inline
    SVG beneath it stands in until then. */
+/* The logomark is portrait (roughly 3:5), so the box matches its proportion
+   rather than squashing it into a square. Height is em-based so it tracks the
+   wordmark if that ever resizes. */
 .brand__mark {
   position: relative;
   display: block;
-  width: 22px;
-  height: 22px;
+  height: 1.75em;
+  aspect-ratio: 280.8 / 469.7;
   flex: none;
 }
 .brand__mark svg,
@@ -1012,10 +1015,10 @@ h1, h2, h3, h4 {
 .site-foot .brand { color: var(--paper); }
 .site-foot .brand__mark rect { fill: var(--paper); }
 .site-foot .brand__mark path { fill: var(--peri); }
-/* A black line-art logomark would vanish on the navy footer. CSS can't recolour
-   an <img>, so flip it. If the logomark isn't monochrome black, drop a
-   logomark-light.svg in instead and point this rule's markup at it. */
-.site-foot .brand__mark img { filter: invert(1); }
+/* The logomark is ink-coloured, which would disappear on the navy footer. CSS
+   can't recolour an <img>, so force it: brightness(0) crushes it to black
+   whatever colour it started as, then invert(1) takes that to pure white. */
+.site-foot .brand__mark img { filter: brightness(0) invert(1); }
 .site-foot .brand__name em { color: color-mix(in srgb, var(--paper) 55%, transparent); }
 
 .foot__top {
