@@ -27,7 +27,9 @@ folder with the **exact filename below** and it appears — no HTML edits needed
 Until the file exists, the page shows a labelled placeholder in its place.
 
 - Format: `.jpg` (use `.png` only if you need transparency — then update the
-  `src` in the HTML to match).
+  `src` in the HTML to match). **Don't ship PNG photographs** — the three
+  focus renders arrived as PNG totalling 5.5 MB and came out at 390 KB as
+  JPEG at quality 82: a 93% saving with no visible difference.
 - Images are `object-fit: cover`, so the **aspect ratio matters more than the
   exact pixel size**. Anything at or above the suggested width is fine.
 - Keep each file under ~400 KB so the site stays fast on a projector's wifi.
@@ -36,13 +38,17 @@ Until the file exists, the page shows a labelled placeholder in its place.
 
 ## `index.html` — Landing
 
-| Filename | Ratio | Suggested px | What it should show |
-|---|---|---|---|
-| `hero-studio.jpg` | 4:5 | 1200 × 1500 | The hero image, portrait. A studio/workshop moment — a model on a bench, a hand on a joint, material samples. Quiet and warm, not a product beauty shot. |
-| `chauki-hero.jpg` | 16:9 | 1920 × 1080 | Chauki in a real 2BHK living room, in use. |
-| `focus-01.jpg` | 1:1 | 1000 × 1000 | A compact apartment living room. |
-| `focus-02.jpg` | 1:1 | 1000 × 1000 | A knock-down joinery / hardware detail, close up. |
-| `focus-03.jpg` | 1:1 | 1000 × 1000 | Flat-pack carton or packed components. |
+| Filename | Ratio | Suggested px | What it should show | Status |
+|---|---|---|---|---|
+| `hero-studio.jpg` | 4:5 | 1200 × 1500 | The hero image, portrait. A studio/workshop moment — a model on a bench, a hand on a joint, material samples. Quiet and warm, not a product beauty shot. | ⏳ |
+| `chauki-hero.jpg` | 16:9 | 1920 × 1080 | Chauki in a real 2BHK living room, in use. | ⏳ |
+| `focus-01.jpg` | 3:4 | 1200 × 1600 | Oxblood bench, studio mark cut into the pivot. | ✅ |
+| `focus-02.jpg` | 3:4 | 1200 × 1600 | Armchair, leather armrest cover with the mark on a wooden medallion. | ✅ |
+| `focus-03.jpg` | 3:4 | 1200 × 1600 | Armchair arm, walnut cap with travertine inlay. | ✅ |
+
+The focus trio were changed from 1:1 to **3:4** — the supplied renders are all
+portrait product details, and a square crop was cutting them badly (the
+tallest is 9:16, so a square would have lost nearly half its height).
 
 ## `work.html` — Work
 
