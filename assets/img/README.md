@@ -73,9 +73,9 @@ tallest is 9:16, so a square would have lost nearly half its height).
 | Filename | Ratio | Suggested px | What it should show |
 |---|---|---|---|
 | `about-hero.jpg` | 21:9 | 2400 × 1030 | Wide banner: the team at work, or the studio space. |
-| `culture-01.jpg` | 3:4 | 1000 × 1333 | Work culture — reserved, portrait. |
-| `culture-02.jpg` | 3:4 | 1000 × 1333 | Work culture — reserved, portrait. |
-| `culture-03.jpg` | 3:4 | 1000 × 1333 | Work culture — reserved, portrait. |
+| `culture-01.jpg` | 3:4 | 1200 × 1600 | The team section. Studio life — a review in progress, a desk mid-work, people talking over a model. Not posed headshots. |
+| `culture-02.jpg` | 3:4 | 1200 × 1600 | As above — vary the scale: one wide-ish room shot, one pair of hands, one over-the-shoulder. |
+| `culture-03.jpg` | 3:4 | 1200 × 1600 | As above. |
 
 ---
 
