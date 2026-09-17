@@ -901,7 +901,10 @@ h1, h2, h3, h4 {
 .band__item:hover img { transform: scale(1.02); }
 
 @media (max-width: 700px) {
-  /* One at a time on a phone, at the source's own 4:5, swipeable. */
+  /* One at a time on a phone, swipeable. Keeps the 4:3 from the base rule
+     rather than reverting to the source's 4:5 — with the hero image now
+     showing on mobile too, portrait frames here made the top of the page
+     very slow to get through. */
   .band {
     display: flex;
     gap: 0.5rem;
@@ -914,7 +917,6 @@ h1, h2, h3, h4 {
   .band::-webkit-scrollbar { display: none; }
   .band__item {
     flex: 0 0 82%;
-    aspect-ratio: 4 / 5;
     scroll-snap-align: center;
   }
 }

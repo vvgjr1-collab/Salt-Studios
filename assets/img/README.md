@@ -50,9 +50,10 @@ Until the file exists, the page shows a labelled placeholder in its place.
 | `brand-02.jpg` | 4:5 src | 1080 × 1350 | Brand band: dark leather swivel chair, mark overlaid. | ✅ |
 
 The **brand band** sits between the pinned statement and the pillars. It is
-full-bleed and crops its 4:5 sources to 4:3 on desktop (two squares came out
-681px tall and swallowed the viewport); on phones it becomes a swipeable row
-at the sources own 4:5. A third frame would make it a proper triptych — add a
+full-bleed and crops its 4:5 sources to 4:3 at every width (two squares came
+out 681px tall on desktop and swallowed the viewport; portrait frames on a
+phone made the top of the page slow to get through, with the hero image now
+showing there too). On phones it becomes a swipeable scroll-snap row. A third frame would make it a proper triptych — add a
 `.band__item` in index.html and switch `grid-template-columns` to
 `repeat(3, 1fr)` in salt.css.
 
