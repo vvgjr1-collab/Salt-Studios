@@ -623,6 +623,17 @@ h1, h2, h3, h4 {
    column below that and it wraps to two lines. */
 @media (min-width: 1200px) {
   .hero__in { grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr); }
+
+  /* Centred, the image floated: its top edge landed mid-headline and its
+     bottom just past the body copy, relating to nothing. Top-aligning it
+     puts its top edge on the headline's, which is the strongest horizontal
+     in the composition.
+     3:4 rather than the source's 4:5 so it reaches further down the column.
+     Not further: stretching it to the full column height needs 0.63, which
+     crops 22% of the width and cuts the figure's head off entirely. 3:4
+     costs 6% and leaves her whole. */
+  .hero__media { align-self: start; }
+  .hero__media .slot { --ar: 3 / 4; }
 }
 
 /* line-by-line mask reveal */
