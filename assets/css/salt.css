@@ -808,10 +808,15 @@ h1, h2, h3, h4 {
 .pin__text {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(1.5rem, 0.7rem + 3.35vw, 4rem);
+  font-size: clamp(1.5rem, 0.75rem + 3.6vw, 4.5rem);
   line-height: 1.22;
   letter-spacing: -0.02em;
-  max-width: 22ch;
+  /* 22ch left roughly half the content width empty on a desktop — the
+     statement read as a narrow column pinned to the left rather than a
+     display moment. The size is capped rather than grown to fill, because
+     this section is a fixed 100svh and the copy runs to about 230
+     characters; any larger and it clips on a short viewport. */
+  max-width: 42ch;
   margin: 0;
   color: var(--ink);
 }
@@ -858,7 +863,9 @@ h1, h2, h3, h4 {
 
 @media (max-width: 700px) {
   .pin { height: 240vh; }
-  .pin__text { max-width: 16ch; }
+  /* No max-width override here: 16ch left about 40% of a phone's width
+     empty on the right, the same fault as the desktop 22ch. The container
+     is narrower than 42ch at this size anyway, so it governs. */
   /* Three items don't fit at phone width — drop the location and let the
      progress bar take the space it frees. */
   .pin__foot { font-size: 0.6875rem; gap: 0.85rem; }
