@@ -615,6 +615,16 @@ h1, h2, h3, h4 {
 }
 .hero__aside { grid-column: 1; grid-row: 2; }
 
+/* Above 1200px the wrap is at or near its 1280 cap, so the geometry stops
+   changing and the text column ends up far wider than it needs — the widest
+   headline line measures 478px inside 794px. Hand that slack to the image.
+   The binding constraint is not the headline but the meta line
+   (Ahmedabad · Est. 2021 · Furniture…) at roughly 640px: take the text
+   column below that and it wraps to two lines. */
+@media (min-width: 1200px) {
+  .hero__in { grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr); }
+}
+
 /* line-by-line mask reveal */
 .line { display: block; overflow: hidden; padding-bottom: 0.06em; }
 .line > span {
