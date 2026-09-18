@@ -65,11 +65,11 @@ tallest is 9:16, so a square would have lost nearly half its height).
 
 | Filename | Ratio | Suggested px | What it should show | Status |
 |---|---|---|---|---|
-| `chauki-wide.jpg` | 21:9 | 2400 × 1030 | Wide banner: all three Chauki modules together. | ⏳ |
-| `chauki-detail-01.jpg` | 1:1 | 1000 × 1000 | Powered-lift mechanism detail. | ⏳ |
-| `chauki-detail-02.jpg` | 1:1 | 1000 × 1000 | Tessellating trapezoid module plan / top view. | ⏳ |
-| `chauki-detail-03.jpg` | 1:1 | 1000 × 1000 | Pebble Pad seats, stacked. | ⏳ |
-| `chauki-detail-04.jpg` | 1:1 | 1000 × 1000 | Chauki raised, in use as a dining surface. | ⏳ |
+| `chauki-wide.jpg` | 21:9 | 1584 × 672 | Both modules together, walnut and marble. | ✅ |
+| `chauki-detail-01.jpg` | 1:1 | 1024 × 1024 | Powered-lift mechanism installed under the top. | ✅ |
+| `chauki-detail-02.jpg` | 1:1 | 1024 × 1024 | Front elevation, the two modules nesting. | ✅ |
+| `chauki-detail-03.jpg` | 1:1 | 1024 × 1024 | Pebble Pad seats tucked under both modules. | ✅ |
+| `chauki-detail-04.jpg` | 1:1 | 1024 × 1024 | Exploded: marble tops, lift frame, four shaped legs. | ✅ |
 | `fold-and-stay.jpg` | 16:9 | 1600 × 900 | Wall-mounted fold-down desk, open, in a rented flat. | ✅ |
 | `nest-bed.jpg` | 16:9 | 1600 × 900 | Knock-down bed frame with under-bed drawers. | ✅ |
 | `monsoon-series.jpg` | 16:9 | 1600 × 900 | Folding bistro set on a small balcony. | ✅ |
