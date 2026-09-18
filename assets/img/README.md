@@ -63,21 +63,21 @@ tallest is 9:16, so a square would have lost nearly half its height).
 
 ## `work.html` — Work
 
-| Filename | Ratio | Suggested px | What it should show |
-|---|---|---|---|
-| `chauki-wide.jpg` | 21:9 | 2400 × 1030 | Wide banner: all three Chauki modules together. |
-| `chauki-detail-01.jpg` | 1:1 | 1000 × 1000 | Powered-lift mechanism detail. |
-| `chauki-detail-02.jpg` | 1:1 | 1000 × 1000 | Tessellating trapezoid module plan / top view. |
-| `chauki-detail-03.jpg` | 1:1 | 1000 × 1000 | Pebble Pad seats, stacked. |
-| `chauki-detail-04.jpg` | 1:1 | 1000 × 1000 | Chauki raised, in use as a dining surface. |
-| `fold-and-stay.jpg` | 16:9 | 1600 × 900 | Wall-mounted fold-down desk, open, in a rented flat. |
-| `nest-bed.jpg` | 16:9 | 1600 × 900 | Knock-down bed frame with under-bed drawers. |
-| `monsoon-series.jpg` | 16:9 | 1600 × 900 | Folding bistro set on a small balcony. |
-| `stack-and-store.jpg` | 16:9 | 1600 × 900 | Slim entryway bench + shoe rack in a narrow corridor. |
-| `terrain-vases.jpg` | 16:9 | 1600 × 900 | Stepped terracotta vases and planters, nesting sizes. |
-| `jharokha-mirrors.jpg` | 16:9 | 1600 × 900 | Carved mango wood jharokha mirror on a wall. |
-| `craft-edit.jpg` | 16:9 | 1600 × 900 | Side table / tray with cane weave and bandhani inlay. |
-| `diya-brass.jpg` | 16:9 | 1600 × 900 | Brass and ceramic tealight holders and urli bowls. |
+| Filename | Ratio | Suggested px | What it should show | Status |
+|---|---|---|---|---|
+| `chauki-wide.jpg` | 21:9 | 2400 × 1030 | Wide banner: all three Chauki modules together. | ⏳ |
+| `chauki-detail-01.jpg` | 1:1 | 1000 × 1000 | Powered-lift mechanism detail. | ⏳ |
+| `chauki-detail-02.jpg` | 1:1 | 1000 × 1000 | Tessellating trapezoid module plan / top view. | ⏳ |
+| `chauki-detail-03.jpg` | 1:1 | 1000 × 1000 | Pebble Pad seats, stacked. | ⏳ |
+| `chauki-detail-04.jpg` | 1:1 | 1000 × 1000 | Chauki raised, in use as a dining surface. | ⏳ |
+| `fold-and-stay.jpg` | 16:9 | 1600 × 900 | Wall-mounted fold-down desk, open, in a rented flat. | ✅ |
+| `nest-bed.jpg` | 16:9 | 1600 × 900 | Knock-down bed frame with under-bed drawers. | ✅ |
+| `monsoon-series.jpg` | 16:9 | 1600 × 900 | Folding bistro set on a small balcony. | ✅ |
+| `stack-and-store.jpg` | 16:9 | 1600 × 900 | Slim entryway bench + shoe rack in a narrow corridor. | ✅ |
+| `terrain-vases.jpg` | 16:9 | 1600 × 900 | Stepped terracotta vases and planters, nesting sizes. | ✅ |
+| `jharokha-mirrors.jpg` | 16:9 | 1600 × 900 | Carved mango wood jharokha mirror on a wall. | ✅ |
+| `craft-edit.jpg` | 16:9 | 1600 × 900 | Side table / tray with cane weave and bandhani inlay. | ✅ |
+| `diya-brass.jpg` | 16:9 | 1600 × 900 | Brass and ceramic tealight holders and urli bowls. | ✅ |
 
 ## `about.html` — About
 
@@ -116,6 +116,9 @@ catalogue. Three rules matter more than the wording of any single prompt:
 ---
 
 ## Catalogue prompts — `work.html`
+
+> **All eight of these have been generated and placed.** Kept for reference,
+> and in case any need regenerating for consistency.
 
 All eight are **16:9**, target 1600 × 900. Filenames are in the work.html
 table above.
