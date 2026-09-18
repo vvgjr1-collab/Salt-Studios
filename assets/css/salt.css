@@ -793,7 +793,10 @@ h1, h2, h3, h4 {
 /* --------------------------------------------------------------------------
    10. Pinned manifesto — the scroll set-piece
    -------------------------------------------------------------------------- */
-.pin { position: relative; height: 280vh; }
+/* 180vh leaves 80vh of scroll travel for the word-by-word lighting, which is
+   enough to read as a deliberate reveal rather than a flash. It was 280vh,
+   which made the landing page long enough to feel like work to get through. */
+.pin { position: relative; height: 180vh; }
 
 .pin__inner {
   position: sticky;
@@ -862,10 +865,7 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 700px) {
-  /* 180vh leaves 80vh of scroll travel for the word-by-word lighting, which
-     is still enough to read as a deliberate reveal rather than a flash, and
-     takes roughly 500px off the page on a phone. */
-  .pin { height: 180vh; }
+  /* Height comes from the base rule now — same 180vh at every width. */
   /* No max-width override here: 16ch left about 40% of a phone's width
      empty on the right, the same fault as the desktop 22ch. The container
      is narrower than 42ch at this size anyway, so it governs. */
