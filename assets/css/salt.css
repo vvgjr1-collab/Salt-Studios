@@ -331,10 +331,11 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: 10001;                        /* over the progress bar and header */
   background: var(--ink);
-  /* Failsafe. If salt.js never runs — blocked, 404, an error earlier in the
-     file — this clears the overlay anyway rather than sealing the site shut
-     behind it. JS always finishes well before 5s and cancels this. */
-  animation: intro-failsafe 0.8s 5s forwards;
+  /* Failsafe. If salt.js never runs, or runs but is a stale cached copy that
+     predates the intro, this clears the overlay rather than sealing the site
+     shut behind it. The intro itself is done by ~2.1s, so 3s is a comfortable
+     margin and a far shorter wait than 5s if it ever does fire. */
+  animation: intro-failsafe 0.7s 3s forwards;
 }
 
 .intro canvas { display: block; width: 100%; height: 100%; }
