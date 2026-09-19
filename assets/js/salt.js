@@ -13,14 +13,168 @@
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
 
   /* ------------------------------------------------------------------
-     Entrance — fires once fonts/layout have settled
+     Entrance — fires once fonts/layout have settled, or once the intro
+     clears, whichever applies.
      ------------------------------------------------------------------ */
-  var ready = function () { root.classList.add('is-ready'); };
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(ready);
-    setTimeout(ready, 900); // never wait on a slow font host
+  var readyCalled = false;
+  function ready() {
+    if (readyCalled) return;
+    readyCalled = true;
+    root.classList.add('is-ready');
+  }
+
+  function readyWhenFontsSettle() {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(ready);
+      setTimeout(ready, 900); // never wait on a slow font host
+    } else {
+      setTimeout(ready, 60);
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Intro — salt falls and fills the screen, then clears onto the site.
+
+     A small script in each <head> adds .intro-on before first paint, and
+     only when this session hasn't seen it, so the overlay is painted with
+     the page rather than flashing in after it. Everything below assumes
+     that class is already there.
+
+     It runs once per session, not per page: an intro between every nav
+     click would be unbearable on a four-page site.
+     ------------------------------------------------------------------ */
+  var introEl = document.querySelector('.intro');
+
+  function endIntro() {
+    root.classList.add('intro-done'); // releases the scroll lock
+    if (introEl) {
+      introEl.classList.add('is-done');
+      setTimeout(function () {
+        if (introEl && introEl.parentNode) introEl.parentNode.removeChild(introEl);
+      }, 700);
+    }
+    ready(); // hero entrance plays as the salt clears
+  }
+
+  function runIntro() {
+    var canvas = introEl.querySelector('canvas');
+    var ctx = canvas && canvas.getContext && canvas.getContext('2d');
+    if (!ctx) { endIntro(); return; }
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0;
+
+    function size() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    size();
+    window.addEventListener('resize', size);
+
+    var FALL = 1400;  // grains falling, drift rising
+    var HOLD = 1550;  // screen fully white, briefly
+    var grains = [];
+    var done = false;
+
+    function spawn(n) {
+      for (var i = 0; i < n; i++) {
+        grains.push({
+          x: Math.random() * W,
+          y: -Math.random() * H * 0.5,
+          r: 0.7 + Math.random() * 1.6,
+          vy: 90 + Math.random() * 280,
+          sway: Math.random() * 6.283,
+          amp: 4 + Math.random() * 14,
+          a: 0.5 + Math.random() * 0.5
+        });
+      }
+    }
+    spawn(300);
+
+    // Surface of the settled salt. Lumpy early, flat once it has filled —
+    // summed sines rather than a real heightmap, which would need far more
+    // grains than 1.2s allows.
+    function pileY(x, p) {
+      var amp = 30 * (1 - p);
+      return (H - H * 1.08 * p) +
+        Math.sin(x * 0.011 + 1.3) * amp +
+        Math.sin(x * 0.029 + 2.7) * amp * 0.5;
+    }
+
+    function finish() {
+      if (done) return;
+      done = true;
+      window.removeEventListener('resize', size);
+      window.removeEventListener('keydown', finish);
+      introEl.removeEventListener('click', finish);
+      endIntro();
+    }
+
+    // Let anyone out early.
+    window.addEventListener('keydown', finish);
+    introEl.addEventListener('click', finish);
+
+    var start = performance.now();
+    var last = start;
+
+    function frame(now) {
+      if (done) return;
+      var t = now - start;
+      var dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      var p = Math.min(t / FALL, 1);
+      // Front-loaded, not back-loaded. An ease-out buried the middle of the
+      // screen within 300ms and the snow never got a moment; squaring keeps
+      // the drift low while the grains fall, then fills quickly at the end.
+      var ease = p * p;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#FFFFFF';
+
+      for (var i = grains.length - 1; i >= 0; i--) {
+        var g = grains[i];
+        g.y += g.vy * dt;
+        g.sway += dt * 2.2;
+        var gx = g.x + Math.sin(g.sway) * g.amp;
+        if (g.y >= pileY(gx, ease)) { grains.splice(i, 1); continue; }
+        ctx.globalAlpha = g.a;
+        ctx.beginPath();
+        ctx.arc(gx, g.y, g.r, 0, 6.283);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+
+      // Steady snowfall rather than scaling with the drift, which now stays
+      // low for most of the run.
+      if (t < FALL) spawn(Math.round(16 + 10 * p));
+
+      ctx.beginPath();
+      ctx.moveTo(0, H + 2);
+      for (var x = 0; x <= W; x += 8) ctx.lineTo(x, pileY(x, ease));
+      ctx.lineTo(W, H + 2);
+      ctx.closePath();
+      ctx.fill();
+
+      if (t >= HOLD) { finish(); return; }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if (root.classList.contains('intro-on') && introEl && !reduced) {
+    // Mark it seen at the start, so navigating mid-intro doesn't replay it.
+    try { sessionStorage.setItem('salt-intro-seen', '1'); } catch (e) {}
+    runIntro();
   } else {
-    setTimeout(ready, 60);
+    if (introEl && introEl.parentNode) introEl.parentNode.removeChild(introEl);
+    root.classList.add('intro-done');
+    readyWhenFontsSettle();
   }
 
   /* ------------------------------------------------------------------

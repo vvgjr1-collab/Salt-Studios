@@ -27,10 +27,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<!-- Marks the document before first paint so the intro overlay arrives with
+     the page rather than flashing in over it, and only on this session's
+     first page. Without JS the class is never added and the overlay never
+     shows. See .intro in salt.css and runIntro() in salt.js. -->
+<script>try{if(!sessionStorage.getItem('salt-intro-seen'))document.documentElement.classList.add('intro-on')}catch(e){}</script>
+
 <link rel="stylesheet" href="assets/css/salt.css">
 </head>
 
 <body>
+<div class="intro" aria-hidden="true"><canvas></canvas></div>
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
