@@ -426,15 +426,64 @@ h1, h2, h3, h4 {
 .nav a[aria-current="page"] { color: var(--ink); }
 .nav a[aria-current="page"]::after { transform: scaleX(1); background: var(--peri-deep); }
 
+/* The one nav item that is a call to action rather than a destination.
+   Selectors are written as `.nav a.nav__cta` rather than `.nav__cta`: the
+   sibling rules are `.nav a[aria-current="page"]` and `.nav a:hover`, which
+   at (0,2,1) outrank a bare `.nav__cta[aria-current]` at (0,2,0). Without
+   the extra weight the pill renders ink text on an ink fill — invisible. */
+.nav a.nav__cta {
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.35s var(--ease), color 0.35s var(--ease),
+              border-color 0.35s var(--ease);
+}
+/* It is a pill, so the sliding underline the other links use would sit
+   outside it. */
+.nav a.nav__cta::after { display: none; }
+.nav a.nav__cta:hover,
+.nav a.nav__cta[aria-current="page"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
 @media (max-width: 700px) {
   /* Bigger touch targets on phones */
   .nav a { padding-block: 0.6rem; }
+  .nav__cta { padding-block: 0.55rem; }
+}
+
+@media (max-width: 620px) {
+  /* Four items plus the wordmark will not fit. The logomark already links
+     home, so "Studio" is the redundant one — drop it and keep the CTA. */
+  .nav a[href="index.html"] { display: none; }
 }
 
 @media (max-width: 560px) {
   .nav { gap: 1.1rem; }
   .nav a { font-size: 0.8125rem; }
+  .nav__cta { padding: 0.5rem 0.85rem; }
   .brand__name { font-size: 1rem; }
+}
+
+.nav__cta-short { display: none; }
+
+@media (max-width: 420px) {
+  /* "Work with us" plus three links plus the wordmark overruns the header
+     below about 400px. The short label buys back ~36px, which is enough to
+     hold down to 320. */
+  .nav { gap: 0.85rem; }
+  .brand__name { font-size: 0.9375rem; }
+  .nav__cta { padding: 0.45rem 0.8rem; }
+  .nav__cta-long { display: none; }
+  .nav__cta-short { display: inline; }
+  /* The 2rem gap between wordmark and nav is the last 16px needed at 320,
+     where the pill was otherwise clipped by 2px. */
+  .site-head__in { gap: 1rem; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1095,6 +1144,107 @@ h1, h2, h3, h4 {
   gap: 0.5rem;
 }
 .card__impact b { font-weight: 500; color: var(--peri-deep); }
+
+/* --------------------------------------------------------------------------
+   14b. Enquiry form
+   -------------------------------------------------------------------------- */
+.enquiry {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+.field--full { grid-column: 1 / -1; }
+
+.field label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 0.6rem;
+}
+.field label span { color: var(--peri-deep); }
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+  padding: 0.6rem 0 0.7rem;
+  transition: border-color 0.3s var(--ease-soft);
+}
+.field textarea {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 0.9rem 1rem;
+  resize: vertical;
+  line-height: 1.6;
+}
+.field select { appearance: none; cursor: pointer; padding-right: 1.5rem; }
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--peri-deep);
+}
+
+/* Only flag a field once the browser has judged it, never while typing. */
+.form.is-checked input:invalid,
+.form.is-checked select:invalid,
+.form.is-checked textarea:invalid { border-color: #B4483F; }
+
+.field__hint {
+  margin: 0.6rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--slate);
+}
+
+.form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 0.5rem;
+}
+.form__note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--slate);
+  max-width: 30ch;
+}
+.form__note.is-error { color: #B4483F; }
+.form__note.is-sent { color: var(--peri-deep); }
+
+.enquiry__side > * + * { margin-top: clamp(2rem, 4vw, 2.75rem); }
+.side-block { border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+.side-block .eyebrow { margin-bottom: 1rem; }
+
+.steps { margin: 0; padding-left: 1.1rem; color: var(--slate); font-size: 0.9375rem; }
+.steps li + li { margin-top: 0.85rem; }
+.steps strong { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 900px) {
+  .enquiry { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .form { grid-template-columns: 1fr; }
+}
 
 /* --------------------------------------------------------------------------
    15. Team

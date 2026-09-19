@@ -257,6 +257,80 @@
   }
 
   /* ------------------------------------------------------------------
+     Enquiry form (contact page)
+
+     There is no backend — this is a static site — so the form composes a
+     message and hands it to the visitor's email client. That works with no
+     account and nothing to maintain, and it never silently swallows an
+     enquiry the way a dead form does.
+
+     >>> STUDIO_EMAIL must be a real address you can receive mail at. <<<
+     To take real submissions instead, sign up for a form service, give the
+     <form> an action and method="POST", and delete this whole block — the
+     browser will then submit it natively.
+     ------------------------------------------------------------------ */
+  var STUDIO_EMAIL = 'studio@saltstudios.in';
+
+  var enquiry = document.getElementById('enquiry-form');
+  if (enquiry) {
+    var note = document.getElementById('form-note');
+    var noteDefault = note ? note.textContent : '';
+
+    enquiry.addEventListener('submit', function (e) {
+      e.preventDefault();
+      enquiry.classList.add('is-checked');
+
+      if (!enquiry.checkValidity()) {
+        var firstBad = enquiry.querySelector(':invalid');
+        if (firstBad) firstBad.focus();
+        if (note) {
+          note.textContent = 'Please fill in the fields marked with an asterisk.';
+          note.className = 'form__note is-error';
+        }
+        return;
+      }
+
+      var get = function (name) {
+        var el = enquiry.elements[name];
+        return el && el.value ? el.value.trim() : '';
+      };
+
+      var lines = [
+        'Name: ' + get('name'),
+        'Email: ' + get('email'),
+        'Company or brand: ' + (get('organisation') || '—'),
+        'Looking for: ' + get('kind'),
+        '',
+        'What they want to collaborate on:',
+        get('brief'),
+        '',
+        '— sent from saltstudios.in'
+      ];
+
+      var subject = 'Project enquiry — ' + get('name');
+      var href = 'mailto:' + STUDIO_EMAIL +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(lines.join('\n'));
+
+      window.location.href = href;
+
+      if (note) {
+        note.textContent = 'Opening your email app. If nothing happens, write to ' +
+          STUDIO_EMAIL + ' directly.';
+        note.className = 'form__note is-sent';
+      }
+    });
+
+    // Clear the error state once they start fixing it.
+    enquiry.addEventListener('input', function () {
+      if (note && note.className !== 'form__note') {
+        note.textContent = noteDefault;
+        note.className = 'form__note';
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------
      Footer year
      ------------------------------------------------------------------ */
   document.querySelectorAll('[data-year]').forEach(function (el) {
