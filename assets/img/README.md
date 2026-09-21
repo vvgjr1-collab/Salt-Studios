@@ -82,7 +82,7 @@ tallest is 9:16, so a square would have lost nearly half its height).
 
 | Filename | Ratio | Suggested px | What it should show | Status |
 |---|---|---|---|---|
-| `team.jpg` | 747 × 440 | as supplied | The five of the team in the studio, navy mat baked in. Shown at its own size, not stretched — see .slot--team. | ✅ |
+| `team.jpg` | 16:9 | 2000 × 1125 | The five of the team in the studio under the wall-mounted logomark. Full column width. | ✅ |
 | `about-hero.jpg` | 16:9 | 1200 × 675 | Wide banner: a review on the workshop floor, four makers round a chair frame. | ✅ |
 | `culture-01.jpg` | 4:5 | 1199 × 1499 | Room scale — the workshop in afternoon light, a figure crossing in motion blur. | ✅ |
 | `culture-02.jpg` | 4:5 | 1200 × 1500 | Close scale — two makers over a bench, marking out a joint. | ✅ |
@@ -92,9 +92,9 @@ tallest is 9:16, so a square would have lost nearly half its height).
 The hero slot was 21:9 and the trio 3:4. Every supplied photo is portrait
 (0.75–0.83), so a 21:9 band would have thrown away two thirds of the height
 and 3:4 would have cut a man off the edge of the group shot. At 16:9 and 4:5
-the worst single loss is 6%, and 16:9 puts the hero in a family with
-`team.jpg` (1.698) further down the page. Both classes already existed
-in salt.css — `slot--wide` and `slot--hero` — so no CSS changed.
+the worst single loss is 6%, and 16:9 matches `team.jpg` further down the
+page. Both classes already existed in salt.css — `slot--wide` and
+`slot--hero`.
 
 ---
 
