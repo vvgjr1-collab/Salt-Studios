@@ -83,10 +83,18 @@ tallest is 9:16, so a square would have lost nearly half its height).
 | Filename | Ratio | Suggested px | What it should show | Status |
 |---|---|---|---|---|
 | `team.jpg` | 747 × 440 | as supplied | The five of the team in the studio, navy mat baked in. Shown at its own size, not stretched — see .slot--team. | ✅ |
-| `about-hero.jpg` | 21:9 | 2400 × 1030 | Wide banner: the team at work, or the studio space. | ⏳ |
-| `culture-01.jpg` | 3:4 | 1200 × 1600 | The team section. Studio life — a review in progress, a desk mid-work, people talking over a model. Not posed headshots. | ⏳ |
-| `culture-02.jpg` | 3:4 | 1200 × 1600 | As above — vary the scale: one wide-ish room shot, one pair of hands, one over-the-shoulder. | ⏳ |
-| `culture-03.jpg` | 3:4 | 1200 × 1600 | As above. | ⏳ |
+| `about-hero.jpg` | 16:9 | 1200 × 675 | Wide banner: a review on the workshop floor, four makers round a chair frame. | ✅ |
+| `culture-01.jpg` | 4:5 | 1199 × 1499 | Room scale — the workshop in afternoon light, a figure crossing in motion blur. | ✅ |
+| `culture-02.jpg` | 4:5 | 1200 × 1500 | Close scale — two makers over a bench, marking out a joint. | ✅ |
+| `culture-03.jpg` | 4:5 | 736 × 920 | Mid scale — two makers on the floor assembling bent-wood frames. | ✅ |
+
+**Both ratios were changed to fit the photographs, not the other way round.**
+The hero slot was 21:9 and the trio 3:4. Every supplied photo is portrait
+(0.75–0.83), so a 21:9 band would have thrown away two thirds of the height
+and 3:4 would have cut a man off the edge of the group shot. At 16:9 and 4:5
+the worst single loss is 6%, and 16:9 puts the hero in a family with
+`team.jpg` (1.698) further down the page. Both classes already existed
+in salt.css — `slot--wide` and `slot--hero` — so no CSS changed.
 
 ---
 
