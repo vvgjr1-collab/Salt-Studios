@@ -33,6 +33,11 @@ Until the file exists, the page shows a labelled placeholder in its place.
 - Images are `object-fit: cover`, so the **aspect ratio matters more than the
   exact pixel size**. Anything at or above the suggested width is fine.
 - Keep each file under ~400 KB so the site stays fast on a projector's wifi.
+- **Replacing a file in place?** Add or bump a `?v=` token on its `src` in the
+  HTML. GitHub Pages serves images with `max-age=600`, so a returning visitor
+  keeps showing the old picture under the unchanged URL - which is exactly
+  what happened when `hero-studio.jpg` was swapped. A brand new filename
+  cannot hit this and needs no token.
 
 ---
 
