@@ -651,6 +651,18 @@ h1, h2, h3, h4 {
   white-space: pre-line;
 }
 
+/* The team photograph is a 747px source with its navy mat baked in. Shown at
+   its own size rather than stretched across the column: filling 1165px would
+   be a 1.6x upscale and go visibly soft, and the mat reads better as a print
+   sitting on the page than as a full-width banner. */
+.slot--team {
+  --ar: 747 / 440;
+  max-width: 747px;
+  margin-inline: auto;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  background: transparent;
+}
+
 /* ratios */
 .slot--wide    { --ar: 16 / 9; }
 .slot--tall    { --ar: 3 / 4; }

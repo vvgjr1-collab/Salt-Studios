@@ -45,7 +45,6 @@ Until the file exists, the page shows a labelled placeholder in its place.
 | `focus-01.jpg` | 3:4 | 1200 × 1600 | Oxblood bench, studio mark cut into the pivot. | ✅ |
 | `focus-02.jpg` | 3:4 | 1200 × 1600 | Armchair, leather armrest cover with the mark on a wooden medallion. | ✅ |
 | `focus-03.jpg` | 3:4 | 1200 × 1600 | Armchair arm, walnut cap with travertine inlay. | ✅ |
-
 | `brand-01.jpg` | 4:5 src | 1080 × 1350 | Brand band: oxblood armchair, mark overlaid. | ✅ |
 | `brand-02.jpg` | 4:5 src | 1080 × 1350 | Brand band: dark leather swivel chair, mark overlaid. | ✅ |
 
@@ -81,12 +80,13 @@ tallest is 9:16, so a square would have lost nearly half its height).
 
 ## `about.html` — About
 
-| Filename | Ratio | Suggested px | What it should show |
-|---|---|---|---|
-| `about-hero.jpg` | 21:9 | 2400 × 1030 | Wide banner: the team at work, or the studio space. |
-| `culture-01.jpg` | 3:4 | 1200 × 1600 | The team section. Studio life — a review in progress, a desk mid-work, people talking over a model. Not posed headshots. |
-| `culture-02.jpg` | 3:4 | 1200 × 1600 | As above — vary the scale: one wide-ish room shot, one pair of hands, one over-the-shoulder. |
-| `culture-03.jpg` | 3:4 | 1200 × 1600 | As above. |
+| Filename | Ratio | Suggested px | What it should show | Status |
+|---|---|---|---|---|
+| `team.jpg` | 747 × 440 | as supplied | The five of the team in the studio, navy mat baked in. Shown at its own size, not stretched — see .slot--team. | ✅ |
+| `about-hero.jpg` | 21:9 | 2400 × 1030 | Wide banner: the team at work, or the studio space. | ⏳ |
+| `culture-01.jpg` | 3:4 | 1200 × 1600 | The team section. Studio life — a review in progress, a desk mid-work, people talking over a model. Not posed headshots. | ⏳ |
+| `culture-02.jpg` | 3:4 | 1200 × 1600 | As above — vary the scale: one wide-ish room shot, one pair of hands, one over-the-shoulder. | ⏳ |
+| `culture-03.jpg` | 3:4 | 1200 × 1600 | As above. | ⏳ |
 
 ---
 
