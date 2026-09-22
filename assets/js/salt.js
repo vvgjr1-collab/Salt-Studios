@@ -45,6 +45,56 @@
      ------------------------------------------------------------------ */
   var introEl = document.querySelector('.intro');
 
+  /* Landing on a #fragment: the browser makes its jump while images are
+     still being laid out, and with scroll-behavior: smooth that animation
+     is dropped the moment the layout shifts under it - so a link like
+     work.html#craft-edit was leaving you at the top of the page. Re-assert
+     the target once things have settled. */
+  // Set by a real gesture, so a correction never fights someone who has
+  // already started reading. Position alone is no good as a guard: the
+  // browser may restore a scroll position from a previous visit to the
+  // page, which looks identical to a deliberate scroll.
+  // When the URL carries a fragment, the browser's own scroll restoration is
+  // the wrong answer and it can land late - on a page with a dozen images it
+  // arrived after the retries below and put a deep link back where the last
+  // visit left off. Restoration stays on for ordinary back/forward.
+  if ('scrollRestoration' in history && location.hash.length > 1) {
+    history.scrollRestoration = 'manual';
+  }
+
+  var userScrolled = false;
+  ['wheel', 'touchmove', 'keydown'].forEach(function (evt) {
+    window.addEventListener(evt, function () { userScrolled = true; }, { passive: true, once: true });
+  });
+
+  function settleHash() {
+    if (location.hash.length < 2 || userScrolled) return;
+    var target;
+    try { target = document.querySelector(location.hash); } catch (e) { return; }
+    if (!target) return;
+    if (Math.abs(target.getBoundingClientRect().top) < 4) return; // already there
+    var html = document.documentElement;
+    var prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    target.scrollIntoView();
+    html.style.scrollBehavior = prev;
+  }
+  // Retried: the browser's own scroll restoration can land after load and
+  // put us back at the top. The already-there check above makes every later
+  // attempt a no-op once one of them has stuck.
+  // A hash change inside the page never fires load, and it is an explicit
+  // request to go somewhere - so the interaction flag resets with it.
+  window.addEventListener('hashchange', function () {
+    userScrolled = false;
+    requestAnimationFrame(settleHash);
+    setTimeout(settleHash, 200);
+  });
+  window.addEventListener('load', function () {
+    requestAnimationFrame(settleHash);
+    setTimeout(settleHash, 200);
+    setTimeout(settleHash, 700);
+  });
+
   function endIntro() {
     root.classList.add('intro-done'); // releases the scroll lock
     if (introEl) {
@@ -54,6 +104,7 @@
       }, 700);
     }
     ready(); // hero entrance plays as the salt clears
+    requestAnimationFrame(settleHash); // the scroll lock ate any #fragment
   }
 
   function runIntro() {
