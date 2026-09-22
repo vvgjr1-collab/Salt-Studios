@@ -33,7 +33,7 @@
      shows. See .intro in salt.css and runIntro() in salt.js. -->
 <script>try{if(!sessionStorage.getItem('salt-intro-seen'))document.documentElement.classList.add('intro-on')}catch(e){}</script>
 
-<link rel="stylesheet" href="assets/css/salt.css?v=20260921b">
+<link rel="stylesheet" href="assets/css/salt.css?v=20260922a">
 </head>
 
 <body>
@@ -102,33 +102,97 @@
     <p class="hero__cue"><i aria-hidden="true"></i> Scroll</p>
   </section>
 
-  <!-- ====================== PARTNER MARQUEE ====================== -->
-  <section class="marquee" aria-label="Brand partners">
-    <p class="marquee__label">Trusted by the brands Indian homes already buy from</p>
+  <!-- ======================== WORK REEL ========================
+       Was a row of partner names set as type. Now the work itself, with
+       the partner kept in each caption so the band still carries the
+       proof it always did. Captions reveal on hover and on keyboard
+       focus, and stay visible on touch where hover doesn't exist.
+       ============================================================ -->
+  <section class="marquee marquee--reel" aria-label="Selected work">
+    <p class="marquee__label">Recent work for the brands Indian homes already buy from</p>
     <div class="marquee__viewport">
-      <!-- Set as type, not logos: the partnerships are fictional, so borrowed
-           trademarks would be the one thing here that could fairly be
-           questioned. Each treatment echoes the character of that brand's
-           real mark — see .mark--* in salt.css. -->
       <div class="marquee__track">
-        <span class="mark mark--godrej">Godrej Interio</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--nilkamal">Nilkamal</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--wakefit">Wakefit</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--durian">Durian</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--ellementry">Ellementry</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--nestasia">Nestasia</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--homecentre">Home Centre</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--chumbak">Chumbak</span>
-        <span class="mark__dot" aria-hidden="true"></span>
-        <span class="mark mark--swadesh">Swadesh Bandhani</span>
-        <span class="mark__dot" aria-hidden="true"></span>
+        <a class="reel__item" href="work.html#chauki">
+          <span class="reel__media">
+            <img src="assets/img/chauki-hero.jpg" alt="The Chauki lift unit raised beside its fixed-height module in a 2BHK living room" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Chauki Modular Table System</span>
+            <span class="reel__meta">Godrej Interio · 2025</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#fold-and-stay">
+          <span class="reel__media">
+            <img src="assets/img/fold-and-stay.jpg" alt="A wall-mounted worktop folded down, with a fixed shelf of books above" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Fold &amp; Stay Study System</span>
+            <span class="reel__meta">Nilkamal · 2024</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#nest-bed">
+          <span class="reel__media">
+            <img src="assets/img/nest-bed.jpg" alt="A pale ash knock-down bed frame with one under-bed drawer pulled open" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Nest Bed Frame</span>
+            <span class="reel__meta">Wakefit · 2023</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#monsoon-series">
+          <span class="reel__media">
+            <img src="assets/img/monsoon-series.jpg" alt="A folding table and two rope chairs on a rain-wet balcony" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Monsoon Series Balcony Furniture</span>
+            <span class="reel__meta">Durian · 2023</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#stack-and-store">
+          <span class="reel__media">
+            <img src="assets/img/stack-and-store.jpg" alt="A slim entryway unit with a cushioned bench, key hooks and shoe shelves" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Stack &amp; Store Entryway</span>
+            <span class="reel__meta">Home Centre · 2022</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#terrain-vases">
+          <span class="reel__media">
+            <img src="assets/img/terrain-vases.jpg" alt="Five stepped stoneware vessels in nesting sizes" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Terrain Vases &amp; Planters</span>
+            <span class="reel__meta">Ellementry · 2024</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#jharokha-mirrors">
+          <span class="reel__media">
+            <img src="assets/img/jharokha-mirrors.jpg" alt="Carved mango wood mirrors with arched jharokha openings" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Jharokha Wall Mirrors</span>
+            <span class="reel__meta">Nestasia · 2023</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#craft-edit">
+          <span class="reel__media">
+            <img src="assets/img/craft-edit.jpg" alt="A cane and wood side table with indigo inlay and a removable tray top" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Craft Edit Accent Collection</span>
+            <span class="reel__meta">Swadesh Bandhani · 2024</span>
+          </span>
+        </a>
+        <a class="reel__item" href="work.html#diya-brass">
+          <span class="reel__media">
+            <img src="assets/img/diya-brass.jpg" alt="Hammered brass tealight holders around an urli bowl of marigolds" loading="lazy">
+          </span>
+          <span class="reel__cap">
+            <span class="reel__name">Diya Tealights &amp; Brass Décor</span>
+            <span class="reel__meta">Chumbak · 2022</span>
+          </span>
+        </a>
       </div>
     </div>
   </section>
@@ -366,6 +430,6 @@
   </div>
 </footer>
 
-<script src="assets/js/salt.js?v=20260921b"></script>
+<script src="assets/js/salt.js?v=20260922a"></script>
 </body>
 </html>

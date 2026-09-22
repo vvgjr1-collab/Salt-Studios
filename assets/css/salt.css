@@ -859,49 +859,104 @@ h1, h2, h3, h4 {
   to   { transform: translate3d(-50%, 0, 0); }
 }
 
-.mark {
+.reel__item {
   flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.3125rem);
-  color: var(--ink-soft);
-  opacity: 0.45;
-  white-space: nowrap;
-  transition: opacity 0.4s var(--ease-soft), color 0.4s var(--ease-soft);
-  user-select: none;
+  position: relative;
+  display: block;
+  width: clamp(14rem, 22vw, 21rem);
+  border-radius: 3px;
+  overflow: hidden;
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+  background: var(--peri-wash);
 }
-.marquee__track:hover .mark { opacity: 0.28; }
-.marquee__track .mark:hover { opacity: 1; color: var(--peri-deep); }
+.reel__item::after { display: none; }
 
+.reel__media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.reel__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Held just off full colour so the band stays quiet next to the hero, and
+     resolves as you point at it - the same read the type marks had. */
+  filter: saturate(0.72) brightness(0.96);
+  transform: scale(1.001);
+  transition: filter 0.5s var(--ease-soft), transform 0.7s var(--ease-soft);
+}
 
-/* Each partner is set in a treatment that echoes its own logo — weight, case,
-   tracking, and serif vs grotesque. Deliberately NOT the real marks, since
-   the partnerships are fictional, but close enough in character that the row
-   reads as a wall of distinct marks rather than a list in one font.
-   Neue Haas covers the grotesques across its weight range; the two serif-caps
-   logos and the script one borrow the accent serif. */
+/* Scrim lives on the caption so one element carries both, and neither the
+   gradient nor the text is painted until it is needed. */
+.reel__cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  /* The scrim fade needs room to breathe on a wide card, but 44px of it
+     swallowed a 126px phone card, so it scales down with the viewport. */
+  padding: clamp(1.5rem, 5vw, 2.75rem) 0.9rem 0.85rem;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--ink) 88%, transparent),
+    color-mix(in srgb, var(--ink) 52%, transparent) 55%,
+    transparent);
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 0.42s var(--ease-soft), transform 0.42s var(--ease-soft);
+}
+.reel__name {
+  font-family: var(--display);
+  font-size: clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem);
+  line-height: 1.2;
+}
+.reel__meta {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.78;
+}
 
-/* bold sans wordmark */
-.mark--godrej     { font-weight: 700; letter-spacing: -0.02em; }
-/* heavy, tight, slightly rounded */
-.mark--nilkamal   { font-weight: 900; letter-spacing: -0.03em; }
-/* lowercase rounded sans */
-.mark--wakefit    { font-weight: 500; text-transform: lowercase; letter-spacing: -0.012em; }
-/* bold italic, set in an oval */
-.mark--durian     { font-weight: 700; font-style: italic; letter-spacing: -0.02em; }
-/* minimal, airy, widely tracked lowercase */
-.mark--ellementry { font-weight: 300; text-transform: uppercase; letter-spacing: 0.3em; font-size: 0.8em; }
-/* gold script lowercase */
-.mark--nestasia   { font-family: var(--serif); font-style: italic; text-transform: lowercase; font-size: 1.22em; letter-spacing: 0; }
-/* plain retail sans caps */
-.mark--homecentre { font-weight: 400; text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.85em; }
-/* classical serif caps, wide tracking */
-.mark--chumbak    { font-family: var(--serif); font-style: normal; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.95em; }
-/* gold serif caps, wider still */
-.mark--swadesh    { font-family: var(--serif); font-style: normal; text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.85em; }
+/* Pointing at one lifts it and lets the rest recede, so the row reads as a
+   single focus rather than nine competing thumbnails. */
+.marquee--reel:hover .reel__item { opacity: 0.55; }
+.marquee--reel .reel__item:hover,
+.marquee--reel .reel__item:focus-visible { opacity: 1; }
+.reel__item { transition: opacity 0.42s var(--ease-soft); }
 
-.mark__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--peri); flex: none; }
+.reel__item:hover .reel__media img,
+.reel__item:focus-visible .reel__media img {
+  filter: saturate(1) brightness(1);
+  transform: scale(1.045);
+}
+.reel__item:hover .reel__cap,
+.reel__item:focus-visible .reel__cap {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reel__item:focus-visible {
+  outline: 2px solid var(--peri-deep);
+  outline-offset: 3px;
+}
+
+/* No hover to give: show every caption and leave the images at full colour,
+   otherwise a phone gets nine unlabelled thumbnails. */
+@media (hover: none) {
+  .reel__cap { opacity: 1; transform: none; }
+  .reel__media img { filter: none; }
+  .marquee--reel:hover .reel__item { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel__media img { transition: none; }
+  .reel__item:hover .reel__media img { transform: none; }
+}
+
 
 /* --------------------------------------------------------------------------
    10. Pinned manifesto — the scroll set-piece

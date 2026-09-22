@@ -61,6 +61,12 @@ showing there too). On phones it becomes a swipeable scroll-snap row. A third fr
 `.band__item` in index.html and switch `grid-template-columns` to
 `repeat(3, 1fr)` in salt.css.
 
+The **work reel** between the hero and the pinned statement shows nine
+pieces rather than the partner names it used to. It reuses the catalogue
+files listed under `work.html` below plus `chauki-hero.jpg` - no new images.
+Each item links to its card on the work page by id, so renaming one of
+those files means updating both the reel and the anchor.
+
 The focus trio were changed from 1:1 to **3:4** — the supplied renders are all
 portrait product details, and a square crop was cutting them badly (the
 tallest is 9:16, so a square would have lost nearly half its height).

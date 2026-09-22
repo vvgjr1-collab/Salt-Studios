@@ -323,7 +323,14 @@
     var items = track.innerHTML;
     track.innerHTML = items + items;
     Array.prototype.slice.call(track.children).slice(track.children.length / 2)
-      .forEach(function (el) { el.setAttribute('aria-hidden', 'true'); });
+      .forEach(function (el) {
+        el.setAttribute('aria-hidden', 'true');
+        // The duplicate half is decoration. Keep it out of the tab order,
+        // itself and anything focusable inside it.
+        if (el.tagName === 'A' || el.tabIndex >= 0) el.tabIndex = -1;
+        el.querySelectorAll && el.querySelectorAll('a, button, input, [tabindex]')
+          .forEach(function (n) { n.tabIndex = -1; });
+      });
     setMarqueeSpeed(track);
   });
 
